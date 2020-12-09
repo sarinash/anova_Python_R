@@ -1,0 +1,197 @@
+```{r}
+library("xlsx")
+library(lme4)
+library(lmerTest)
+library(interplot)
+mydata <- "C:/Users/sarina/Desktop/fluency and ioc.xlsx"
+# Multiple Linear Regression Example 
+my_data <-   read.xlsx(mydata, sheetName = "Sheet1",header = T)
+my_data$Music <- factor(my_data$Music, levels=c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"))
+
+my_data <- data.frame(my_data)
+my_data <- subset(my_data, !is.na(Music))
+
+est.rmaov <- aov(fluency ~ Music + Error(ID), data=my_data)
+summary(est.rmaov)
+
+library(ggplot2)
+library("ggpubr")
+par(bg=NA)
+p <- ggline(my_data, x = "Music", y = "fluency", 
+       add = c("mean_se"), 
+       order = c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"),
+       ylab = "Fluency (numbers)", xlab = "Music", x.text.angle=45)
+my_comparisons <- list( c("No_Music", "Positive_Upbeat"), c("No_Music", "Negative_Upbeat"), c("No_Music", "Positive_Reflective"),c("Negative_Reflective", "Positive_Reflective"), c("Negative_Reflective", "Negative_Upbeat"), c("Negative_Reflective", "Positive_Upbeat"), c("Positive_Reflective", "Negative_Upbeat"), c("Positive_Reflective", "Positive_Upbeat"),c("Negative_Upbeat","Positive_Upbeat"),c("No_Music", "Negative_Reflective")  )
+p  + stat_compare_means(label = "p.signif", method = "t.test",
+                                               ref.group = ".all.") 
+
+
+```
+
+```{r}
+library("xlsx")
+library(lme4)
+library(lmerTest)
+library(interplot)
+mydata <- "C:/Users/sarina/Desktop/fluency and ioc.xlsx"
+# Multiple Linear Regression Example 
+my_data <-   read.xlsx(mydata, sheetName = "Sheet1",header = T)
+my_data$Music <- factor(my_data$Music, levels=c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"))
+
+my_data <- data.frame(my_data)
+my_data <- subset(my_data, !is.na(Music))
+
+est.rmaov <- aov(originalitylast ~ Music + Error(ID), data=my_data)
+summary(est.rmaov)
+
+library(ggplot2)
+library("ggpubr")
+par(bg=NA)
+p <- ggline(my_data, x = "Music", y = "originalitylast", 
+       add = c("mean_se"), 
+       order = c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"),
+       ylab = "Originality (a.u.)", xlab = "Music", x.text.angle=45)
+my_comparisons <- list( c("No_Music", "Positive_Upbeat"), c("Negative_Reflective", "Positive_Upbeat"), c("Negative_Upbeat","Positive_Upbeat"))
+p  + stat_compare_means(label = "p.signif", method = "t.test",
+                                               ref.group = ".all.") +stat_compare_means(comparisons = my_comparisons) 
+```
+
+```{r}
+library("xlsx")
+library(lme4)
+library(lmerTest)
+library(interplot)
+mydata <- "C:/Users/sarina/Desktop/fluency and ioc.xlsx"
+# Multiple Linear Regression Example 
+my_data <-   read.xlsx(mydata, sheetName = "Sheet1",header = T)
+my_data$Music <- factor(my_data$Music, levels=c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"))
+
+my_data <- data.frame(my_data)
+my_data <- subset(my_data, !is.na(Music))
+
+est.rmaov <- aov(ratio ~ Music + Error(ID), data=my_data)
+summary(est.rmaov)
+
+library(ggplot2)
+library("ggpubr")
+par(bg=NA)
+p <- ggline(my_data, x = "Music", y = "ratio", 
+       add = c("mean_se"), 
+       order = c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"),
+       ylab = "Index of Converegence (IOC) (a.u.)", xlab = "Music", x.text.angle=45)
+my_comparisons <- list( c("No_Music", "Positive_Upbeat"), c("Negative_Reflective", "Positive_Upbeat"), c("Positive_Reflective", "Positive_Upbeat"),c("Negative_Upbeat","Positive_Upbeat"))
+p  + stat_compare_means(label = "p.signif", method = "t.test",
+                                               ref.group = ".all.") +stat_compare_means(comparisons = my_comparisons) 
+```
+
+```{r}
+library("xlsx")
+library(lme4)
+library(lmerTest)
+library(interplot)
+mydata <- "C:/Users/sarina/Desktop/fluency and ioc.xlsx"
+# Multiple Linear Regression Example 
+my_data <-   read.xlsx(mydata, sheetName = "Sheet1",header = T)
+my_data$Music <- factor(my_data$Music, levels=c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"))
+
+my_data <- data.frame(my_data)
+my_data <- subset(my_data, !is.na(Music))
+
+est.rmaov <- aov(HMS ~ Music + Error(ID), data=my_data)
+summary(est.rmaov)
+
+library(ggplot2)
+library("ggpubr")
+par(bg=NA)
+p <- ggline(my_data, x = "Music", y = "HMS", 
+       add = c("mean_se"), 
+       order = c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"),
+       ylab = "Head Movement synchrony (HMS) (a.u.)", xlab = "Music", x.text.angle=45)
+my_comparisons <- list( c("No_Music", "Positive_Upbeat"), c("No_Music", "Positive_Reflective"))
+p  + stat_compare_means(label = "p.signif", method = "t.test",
+                                               ref.group = ".all.") +stat_compare_means(comparisons = my_comparisons) 
+```
+```{r}
+library("xlsx")
+library(lme4)
+library(lmerTest)
+library(interplot)
+mydata <- "C:/Users/sarina/Desktop/fluency and ioc.xlsx"
+# Multiple Linear Regression Example 
+my_data <-   read.xlsx(mydata, sheetName = "Sheet1",header = T)
+my_data$Music <- factor(my_data$Music, levels=c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"))
+
+my_data <- data.frame(my_data)
+my_data <- subset(my_data, !is.na(Music))
+
+est.rmaov <- aov(HMS ~ Music + Error(ID), data=my_data)
+summary(est.rmaov)
+
+library(ggplot2)
+library("ggpubr")
+par(bg=NA)
+p <- ggline(my_data, x = "Music", y = "HMS", 
+       add = c("mean_se"), 
+       order = c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"),
+       ylab = "Head Movement synchrony (HMS) (a.u.)", xlab = "Music", x.text.angle=45)
+my_comparisons <- list( c("No_Music", "Positive_Upbeat"), c("No_Music", "Positive_Reflective") )
+p  + stat_compare_means(label = "p.signif", method = "t.test",
+                                               ref.group = ".all.") +stat_compare_means(comparisons = my_comparisons) 
+```
+```{r}
+library("xlsx")
+library(lme4)
+library(lmerTest)
+library(interplot)
+mydata <- "C:/Users/sarina/Desktop/fluency and ioc.xlsx"
+# Multiple Linear Regression Example 
+my_data <-   read.xlsx(mydata, sheetName = "Sheet1",header = T)
+my_data$Music <- factor(my_data$Music, levels=c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"))
+
+my_data <- data.frame(my_data)
+my_data <- subset(my_data, !is.na(Music))
+
+est.rmaov <- aov(fnirsr ~ Music + Error(ID), data=my_data)
+summary(est.rmaov)
+
+library(ggplot2)
+library("ggpubr")
+par(bg=NA)
+p <- ggline(my_data, x = "Music", y = "fnirsr", 
+       add = c("mean_se"), 
+       order = c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"),
+       ylab = "IBS (middle) (a.u.)", xlab = "Music", x.text.angle=45)
+my_comparisons <- list( c("No_Music", "Positive_Upbeat"), c("No_Music", "Negative_Upbeat"), c("No_Music", "Positive_Reflective"),c("Negative_Reflective", "Positive_Reflective"), c("Negative_Reflective", "Negative_Upbeat"), c("Negative_Reflective", "Positive_Upbeat"), c("Positive_Reflective", "Negative_Upbeat"), c("Positive_Reflective", "Positive_Upbeat"),c("Negative_Upbeat","Positive_Upbeat"), c("Negative_Reflective","No_Music")  )
+
+p  + stat_compare_means(label = "p.signif", method = "t.test",
+                                               ref.group = ".all.") +stat_compare_means(comparisons = my_comparisons) 
+```
+```{r}
+library("xlsx")
+library(lme4)
+library(lmerTest)
+library(interplot)
+mydata <- "C:/Users/sarina/Desktop/fluency and ioc.xlsx"
+# Multiple Linear Regression Example 
+my_data <-   read.xlsx(mydata, sheetName = "Sheet1",header = T)
+my_data$Music <- factor(my_data$Music, levels=c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"))
+
+my_data <- data.frame(my_data)
+my_data <- subset(my_data, !is.na(Music))
+
+est.rmaov <- aov(fnirsl ~ Music + Error(ID), data=my_data)
+summary(est.rmaov)
+
+library(ggplot2)
+library("ggpubr")
+par(bg=NA)
+p <- ggline(my_data, x = "Music", y = "fnirsl", 
+       add = c("mean_se"), 
+       order = c("No_Music", "Negative_Reflective", "Positive_Reflective", "Negative_Upbeat", "Positive_Upbeat"),
+       ylab = "IBS (left) (a.u.)", xlab = "Music", x.text.angle=45)
+my_comparisons <- list( c("No_Music", "Positive_Upbeat"), c("No_Music", "Negative_Upbeat"), c("No_Music", "Positive_Reflective"),c("Negative_Reflective", "Positive_Reflective"), c("Negative_Reflective", "Negative_Upbeat"), c("Negative_Reflective", "Positive_Upbeat"), c("Positive_Reflective", "Negative_Upbeat"), c("Positive_Reflective", "Positive_Upbeat"),c("Negative_Upbeat","Positive_Upbeat"), c("Negative_Reflective","No_Music")   )
+
+p  + stat_compare_means(label = "p.signif", method = "t.test",
+                                               ref.group = ".all.") +stat_compare_means(comparisons = my_comparisons) 
+```
+       
